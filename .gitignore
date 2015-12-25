@@ -61,4 +61,4 @@ target/
 # Custom
 .DS_Store
 *.swp
-
+*/.idea/
