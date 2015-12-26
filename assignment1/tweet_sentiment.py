@@ -33,7 +33,6 @@ def sentence_sentiment(word_list, gram, sent_dict):
     length = len(word_list)
 
     if gram == 0 and length != 0:
-        print "35: Gram became zero. Investigate."
         return 0
 
     if length == 0:
@@ -53,12 +52,16 @@ def sentence_sentiment(word_list, gram, sent_dict):
             score += sent_dict[key]
             remove_from_to.append(value)
 
+    if not remove_from_to:
+        return sentence_sentiment(word_list, gram - 1, sent_dict)
+
     remove_from_to = combine_interval(remove_from_to)
 
     prev = 0
     for interval in remove_from_to:
         score += sentence_sentiment(word_list[prev:interval['start']], gram - 1, sent_dict)
         prev = interval['end']
+    score += sentence_sentiment(word_list[remove_from_to[-1]['start']:], gram - 1, sent_dict)
 
     return score
 
@@ -78,7 +81,7 @@ def calc_sentiment(sent_dict, max_gram, fp):
 
         word_list = [word.lower() for word in tweet_text.split(" ") if word]
         score = sentence_sentiment(word_list, max_gram, sent_dict)
-        if score != 0 and debug:
+        if score == 12 and debug:
             print tweet_text, score
         if not debug:
             print score
