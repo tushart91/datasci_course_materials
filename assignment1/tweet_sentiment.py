@@ -2,7 +2,7 @@ import sys
 import json
 from time import time
 
-debug = True
+debug = False
 
 def read_sentiments(fp):
     fp.seek(0)
@@ -104,7 +104,7 @@ def main():
 
 if __name__ == '__main__':
 
-    debug = False
+    # debug = True
 
     if debug:
         start = time()
