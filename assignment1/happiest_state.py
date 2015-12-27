@@ -181,7 +181,7 @@ def calc_sentiment(sent_dict, max_gram, fp):
             happiest_score = avg
             happiest_state = key
 
-    print happiest_state, happiest_score
+    print happiest_state
     return 1
 
 def lines(fp):
