@@ -42,8 +42,7 @@ if __name__ == '__main__':
     if debug:
         lines = open(sys.argv[2])
 
-    for output in mr.execute(input, mapper, reducer):
-        if debug:
+        for output in mr.__execute__(input, mapper, reducer):
             flag = False
             lines.seek(0)
             for line in lines:
@@ -52,10 +51,7 @@ if __name__ == '__main__':
                     break
             if not flag:
                 print output
-
-        else:
-            print output
-
-    input.close()
-    if debug:
         lines.close()
+    else:
+        mr.execute(input, mapper, reducer)
+    input.close()

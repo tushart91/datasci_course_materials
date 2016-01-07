@@ -30,14 +30,14 @@ if __name__ == '__main__':
     debug = False
     # debug = True
     input = open(sys.argv[1])
+
     if debug:
         lines = open(sys.argv[2])
         dict = {}
         for line in lines:
             dict[line[0]] = set(line[1])
 
-    for output in mr.execute(input, mapper, reducer):
-        if debug:
+        for output in mr.__execute__(input, mapper, reducer):
             flag = True
             for value in output[1]:
                 if value not in dict[output[0]]:
@@ -45,9 +45,8 @@ if __name__ == '__main__':
                     break
                 if not flag:
                     print output, flag
-        else:
-            print output
+        lines.close()
+    else:
+        mr.execute(input, mapper, reducer)
 
     input.close()
-    if debug:
-        lines.close()
