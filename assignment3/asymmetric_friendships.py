@@ -21,8 +21,8 @@ def reducer(key, list_of_values):
     # key: word
     # value: list of occurrence counts
     if len(list_of_values) == 1:
-        mr.emit(list_of_values[0])
-        mr.emit(list(reversed(list_of_values[0])))
+        mr.emit(tuple(list_of_values[0]))
+        mr.emit(tuple(reversed(list_of_values[0])))
 
 # Do not modify below this line
 # =============================

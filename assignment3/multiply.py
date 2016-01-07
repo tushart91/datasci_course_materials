@@ -35,7 +35,7 @@ def reducer(key, list_of_values):
         if len(value) == 2:
             sum += value[0] * value[1]
     ret.append(sum)
-    mr.emit(ret)
+    mr.emit(tuple(ret))
 
 # Do not modify below this line
 # =============================
