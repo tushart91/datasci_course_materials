@@ -27,5 +27,21 @@ def reducer(key, list_of_values):
 # Do not modify below this line
 # =============================
 if __name__ == '__main__':
+    debug = False
+    # debug = True
     input = open(sys.argv[1])
-    mr.execute(input, mapper, reducer)
+    if debug:
+        lines = open(sys.argv[2])
+        for output in mr.__execute__(input, mapper, reducer):
+            flag = True
+            lines.seek(0)
+            for line in lines:
+                flag = line.strip() == output
+                if flag:
+                    break
+            if not flag:
+                print output
+        lines.close()
+    else:
+        mr.execute(input, mapper, reducer)
+    input.close()
